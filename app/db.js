@@ -1,0 +1,3 @@
+/**
+ * Handles database connections
+ */
