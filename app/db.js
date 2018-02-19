@@ -64,4 +64,7 @@ var addUSER = function(data, callback) {
         }).catch(function(err) {
             callback(0);
         });
-}
+};
+
+/**Export the modules */
+module.exports.addUSER = addUSER;
