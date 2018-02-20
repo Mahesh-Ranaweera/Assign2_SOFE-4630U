@@ -22,4 +22,9 @@ router.post('/signup_user', function(req, res, next) {
 
 });
 
+/**user dashboard */
+router.post('/dashboard', function(req, res, next){
+    
+});
+
 module.exports = router;
