@@ -17,6 +17,13 @@ router.get('/signup', function(req, res, next) {
     });
 });
 
+/**user signin page */
+router.get('/signin', function(req, res, next){
+    res.render('signin', {
+        title: 'Signin'
+    });
+});
+
 /**user signup post */
 router.post('/signup_user', function(req, res, next) {
 
