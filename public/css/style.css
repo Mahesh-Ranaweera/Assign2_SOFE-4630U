@@ -194,7 +194,7 @@
 html,
 body {
     margin: 0;
-    background-color: #E2EFF1 !important;
+    background-color: #f7db60 !important;
 }
 
 * {
@@ -254,7 +254,7 @@ a {
     line-height: 44px;
     font-weight: 600;
     box-sizing: border-box;
-    color: #276ee3;
+    color: var(--darkblue-sec) !important;
 }
 
 .app-nav-left {
