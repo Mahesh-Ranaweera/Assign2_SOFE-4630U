@@ -70,7 +70,13 @@ var getUSER = function(useremail, callback){
     //get user data based on user email
     r.db(dbname).table(tbusers).get(useremail).run()
         .then(function(response){
-            console.log(response);
+           // console.log(response);
+
+            if(response == null){
+                callback(null);
+            }else{
+                callback(response);
+            }
         }).catch(function(err){
             console.log(err);
         });

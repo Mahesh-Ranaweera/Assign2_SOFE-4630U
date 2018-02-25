@@ -26,9 +26,14 @@ var sess;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', {
-        title: 'Home'
-    });
+    /**Redirect user if session exists */
+    if (req.session.usersess) {
+        res.redirect('/dashboard');
+    } else {
+        res.render('index', {
+            title: 'Home'
+        });
+    }
 });
 
 /*user login page */
@@ -84,8 +89,15 @@ router.post('/user_signup', function(req, res, next){
 
 /**user signin page */
 router.get('/signin', function(req, res, next){
+    var alert = null;
+
+    if(req.query.notify != null){
+        alert = req.query.notify;
+    }
+
     res.render('signin', {
-        title: 'Signin'
+        title: 'Signin',
+        alert: alert
     });
 });
 
@@ -95,7 +107,24 @@ router.post('/user_signin', function(req, res, next){
     var passw = req.body.strPassw;
 
     dbconn.getUSER(email, function(state){
-        console.log(state);
+        console.log(state.email);
+
+        /**check if user exists */
+        if(state != null){
+            if(state.email == email && encrypt.compareHASH(passw, state.passw)){
+                /**Create a user session */
+                sess = req.session;
+                sess.usersess = true;
+                sess.email = state.email;
+                sess.name  = state.fname + ' ' + state.lname;
+
+                res.redirect('/dashboard');
+            }else{
+                res.redirect('/signin?notify=passw');
+            }
+        }else{
+            res.redirect('/signin?notify=notfound');
+        }
     });
 });
 
@@ -106,8 +135,29 @@ router.post('/signup_user', function(req, res, next) {
 
 /**user dashboard */
 router.get('/dashboard', function(req, res, next){
-    res.render('dashboard', {
-        title: 'Dashboard'
+    /**Makesure user session exists */
+    if (req.session.usersess) {
+        username = sess.name;
+        useremail = sess.email;
+
+        res.render('dashboard', {
+            title: 'Dashboard',
+            name: username
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
+
+/**SIGNOUT */
+router.get('/signout', function(req, res, next) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/');
+        }
     });
 });
 
