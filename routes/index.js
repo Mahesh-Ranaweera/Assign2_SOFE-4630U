@@ -30,8 +30,10 @@ router.post('/signup_user', function(req, res, next) {
 });
 
 /**user dashboard */
-router.post('/dashboard', function(req, res, next){
-    
+router.get('/dashboard', function(req, res, next){
+    res.render('dashboard', {
+        title: 'Dashboard'
+    });
 });
 
 module.exports = router;

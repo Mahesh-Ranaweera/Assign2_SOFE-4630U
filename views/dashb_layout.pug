@@ -1,0 +1,17 @@
+extends header
+
+block content
+    .app-menu
+        .app-nav-left
+            .app-logo
+            .app-name
+                | APPNAME
+
+        .app-nav-right.smooth
+            a(href='/signout')
+                .app-nav-title
+                    | SIGN OUT
+                    span(uk-icon='icon: sign-out' title='SIGN OUT')
+
+    .app-content
+        block dashb
