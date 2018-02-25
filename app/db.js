@@ -52,8 +52,7 @@ var addUSER = function(data, callback) {
                     'email': data.email,
                     'fname': data.fname,
                     'lname': data.lname,
-                    'verified': false,
-                    'passw': hash
+                    'passw': data.passw
                 }).run();
 
                 callback(1);
@@ -66,5 +65,17 @@ var addUSER = function(data, callback) {
         });
 };
 
+/**USER  getuser*/
+var getUSER = function(useremail, callback){
+    //get user data based on user email
+    r.db(dbname).table(tbusers).get(useremail).run()
+        .then(function(response){
+            console.log(response);
+        }).catch(function(err){
+            console.log(err);
+        });
+}
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
+module.exports.getUSER = getUSER;

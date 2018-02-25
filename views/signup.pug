@@ -9,7 +9,7 @@ block content
                 .uk-card-title
                     | SIGN UP
 
-                form.uk-grid-small(method='POST')
+                form.uk-grid-small(method='POST', action='/user_signup')
                     .uk-margin
                         label.text-label(for='strEmail') Email:
                         input.uk-input(name='strEmail', type='email', required)
