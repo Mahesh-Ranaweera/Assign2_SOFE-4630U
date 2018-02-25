@@ -4,7 +4,7 @@
  * SOFE4630U: Cloud Computing Assignment 2
  * Feb 25, 2018
  * 
- * App routing
+ * App routing code
  */
 
 var express = require('express');
