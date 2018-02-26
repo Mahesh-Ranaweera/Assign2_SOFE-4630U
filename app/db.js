@@ -83,6 +83,9 @@ var getUSER = function(useremail, callback){
 }
 
 /** */
+var getDetails = function(data, callback){
+    
+}
 
 /**Export the modules */
 module.exports.addUSER = addUSER;
