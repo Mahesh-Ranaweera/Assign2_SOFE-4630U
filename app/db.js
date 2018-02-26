@@ -82,6 +82,8 @@ var getUSER = function(useremail, callback){
         });
 }
 
+/** */
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
