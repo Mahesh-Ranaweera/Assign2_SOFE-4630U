@@ -87,6 +87,11 @@ var getDetails = function(data, callback){
     
 }
 
+/**Save site */
+var saveSite = function(data, callback){
+    
+}
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
