@@ -92,6 +92,11 @@ var saveSite = function(data, callback){
     
 }
 
+/**Get specfic site data */
+var getSite = function(data, callback){
+    
+}
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
