@@ -97,6 +97,15 @@ var getSite = function(data, callback){
     
 }
 
+/**download site */
+var downloadSite = function(data, callback){
+
+}
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
+module.exports.getDetails = getDetails;
+module.exports.saveSite = saveSite;
+module.exports.getSite = getSite;
+module.exports.downloadSite = downloadSite;
