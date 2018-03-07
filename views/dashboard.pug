@@ -4,22 +4,43 @@ block dashb
 
     .section
         .section-header
-            | Website Information
-        .content-card
-            form.uk-grid-small(method='POST')
-                .uk-margin
-                    .uk-width-1-1
-                        label.text-label(for='strWebsiteName') Website Name:
-                        input.uk-input(name='strWebsiteName', type='text', required)
-                    .uk-margin
-                        .uk-text-right
-                            button.uk-button.uk-button-primary(name='btnSigin', type='submit') SIGN IN
+            | User Groups
+        //- .content-card
+        //-     form.uk-grid-small(method='POST')
+        //-         .uk-margin
+        //-             .uk-width-1-1
+        //-                 label.text-label(for='strGroupName') Group Name:
+        //-                 input.uk-input(name='strGroupName', type='text', required)
+        //-             .uk-margin
+        //-                 .uk-text-right
+        //-                     button.uk-button.uk-button-primary(name='btnSigin', type='submit') SIGN IN
 
         .section-header
             | Define web pages
-        .content-card
-            //-define the pages
-            .uk-width-1-1
-                input.uk-input.uk-width-1-2.uk-form-blank(type='text', placeholder='Enter Page Name')
-                .uk-text-left
-                    button.uk-button.uk-button-primary(name='btnSigin', type='submit') SIGN IN
+        //.content-card
+        .section
+            //-group cards
+            .card-holder.three_w
+                .uk-card.uk-card-primary.uk-card-hover.uk-card-body.card-height
+                    .card-icon-center
+                        span(uk-icon='icon: plus; ratio: 2')
+
+            .card-holder.three_w
+                .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
+
+                    .card-body.smooth
+
+                    .card-footer
+                        button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
+                            span(uk-icon='icon: trash')
+
+                        //-date
+                        .date-info
+
+            div.uk-flex-top(id="targetDEL", uk-modal)
+                .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
+                    button.uk-modal-close-default(type='button', uk-close)
+                    .uk-modal-header
+                        h2.uk-modal-title DELETE NOTE
+
+                        
