@@ -450,7 +450,7 @@ a {
     color: #222328 !important;
 }
 
-.card-footer {
+.card-footer, .card-footer-center{
     height: 40px;
     width: 100%;
     float: left;
@@ -458,7 +458,15 @@ a {
     right: 0;
     bottom: 0;
     position: absolute;
+}
+
+.card-footer {
     background-color: rgba(33, 150, 243, 0.05);
+}
+
+.card-footer-center{
+    text-align: center;
+    line-height: 40px;
 }
 
 .card-body {

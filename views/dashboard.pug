@@ -1,34 +1,35 @@
 extends dashb_layout
 
 block dashb
-
-    .section
-        .section-header
-            | User Groups
-        //- .content-card
-        //-     form.uk-grid-small(method='POST')
-        //-         .uk-margin
-        //-             .uk-width-1-1
-        //-                 label.text-label(for='strGroupName') Group Name:
-        //-                 input.uk-input(name='strGroupName', type='text', required)
-        //-             .uk-margin
-        //-                 .uk-text-right
-        //-                     button.uk-button.uk-button-primary(name='btnSigin', type='submit') SIGN IN
-
-        .section-header
-            | Define web pages
+    .content-header
+        
         //.content-card
         .section
             //-group cards
-            .card-holder.three_w
-                .uk-card.uk-card-primary.uk-card-hover.uk-card-body.card-height
+            .card-holder.half_w
+                .uk-card.uk-card-primary.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #createGroup")
                     .card-icon-center
                         span(uk-icon='icon: plus; ratio: 2')
+                    .card-footer-center
+                        | Create Group
+            
+            .card-holder.half_w
+                .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #joinGroup")
+                    .card-icon-center
+                        span(uk-icon='icon: users; ratio: 2')
+                    .card-footer-center
+                        | Join Group
+        
+        .section-header
+            | User Groups
+        
+        .section
 
             .card-holder.three_w
                 .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
 
-                    .card-body.smooth
+                    .card-body.smooth()
+                        .uk-card-title Group Name
 
                     .card-footer
                         button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
@@ -37,10 +38,37 @@ block dashb
                         //-date
                         .date-info
 
-            div.uk-flex-top(id="targetDEL", uk-modal)
+            div.uk-flex-top(id="createGroup", uk-modal)
                 .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
                     button.uk-modal-close-default(type='button', uk-close)
                     .uk-modal-header
-                        h2.uk-modal-title DELETE NOTE
+                        h2.uk-modal-title Create New Group
+                    
+                    .uk-modal-body
+                        form.uk-grid-small(method='POST', action='/create_group')
+                            .uk-width-1-1
+                                label(for='groupName') Enter Group Name:
+                                input.uk-input(name='groupName', type='text', required)
+
+                            .uk-margin
+                                .uk-text-right
+                                    button.uk-button.uk-button-primary(name='btncreateGroup', type='submit') CREATE GROUP
+                    
+
+            div.uk-flex-top(id="joinGroup", uk-modal)
+                .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
+                    button.uk-modal-close-default(type='button', uk-close)
+                    .uk-modal-header
+                        h2.uk-modal-title Join Group
+
+                    .uk-modal-body
+                        form.uk-grid-small(method='POST', action='/create_group')
+                            .uk-width-1-1
+                                label(for='groupID') Enter Group ID:
+                                input.uk-input(name='groupID', type='password' required)
+
+                            .uk-margin
+                                .uk-text-right
+                                    button.uk-button.uk-button-primary(name='btnjoinGroup', type='submit') JOIN GROUP
 
                         
