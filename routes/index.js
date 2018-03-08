@@ -107,7 +107,7 @@ router.post('/user_signin', function(req, res, next){
     var passw = req.body.strPassw;
 
     dbconn.getUSER(email, function(state){
-        console.log(state.email);
+        //console.log(state.email);
 
         /**check if user exists */
         if(state != null){
@@ -128,9 +128,24 @@ router.post('/user_signin', function(req, res, next){
     });
 });
 
-/**user signup post */
-router.post('/signup_user', function(req, res, next) {
+/**Create Group */
+router.post('/create_group', function(req, res, next){
+    var group_name = req.body.groupName;
 
+    data = {
+        gname: group_name,
+        uemail: sess.email
+    }
+
+    dbconn.createGroup(data, function(state){
+        console.log(state)
+
+        if(state == 1){
+            res.redirect('/dashboard');
+        }else{
+            res.redirect('/dashboard?notify=error')
+        }
+    });
 });
 
 /**user dashboard */

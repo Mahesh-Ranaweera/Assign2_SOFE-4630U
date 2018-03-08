@@ -14,8 +14,10 @@ var r = require('rethinkdbdash')({
 /**DB tables */
 var dbname = "app_db";
 var tbusers = "users";
+var tbgroups= "groups";
 
 /**Setting up the app tables */
+// create user table
 r.dbList().contains(dbname)
     .do(function(dbExists) {
         return r.branch(
@@ -38,6 +40,17 @@ r.db(dbname).tableList().contains(tbusers)
             }));
     }).run();
 
+/**Create table groups */
+r.db(dbname).tableList().contains(tbgroups)
+    .do(function(dbTableExists) {
+        return r.branch(
+            dbTableExists, {
+                tables_created: 0
+            },
+            r.db(dbname).tableCreate(tbgroups, {
+                primaryKey: 'groupid'
+            }));
+    }).run();
 
 /**USER signup */
 var addUSER = function(data, callback) {
@@ -52,7 +65,8 @@ var addUSER = function(data, callback) {
                     'email': data.email,
                     'fname': data.fname,
                     'lname': data.lname,
-                    'passw': data.passw
+                    'passw': data.passw,
+                    'groups': []
                 }).run();
 
                 callback(1);
@@ -82,30 +96,37 @@ var getUSER = function(useremail, callback){
         });
 }
 
-/** */
-var getDetails = function(data, callback){
-    
-}
+/**Create Group */
+var createGroup = function(data, callback){
+    console.log(data)
 
-/**Save site */
-var saveSite = function(data, callback){
-    
-}
-
-/**Get specfic site data */
-var getSite = function(data, callback){
-    
-}
-
-/**download site */
-var downloadSite = function(data, callback){
-
+    //insert the group data
+    r.db(dbname).table(tbgroups).insert({
+        'groupname': data.gname,
+        'owner': data.uemail ,
+        'groupmembers': [data.uemail],
+        'groupchat': []
+    }).run()
+    .then(function(response){
+        r.db(dbname).table(tbusers).get(data.uemail)
+            .update({
+                'groups': r.row('groups').append({
+                    'groupid': response.generated_keys[0]
+                })
+            }).run()
+        .then(function (resp){
+            callback(1);
+        })
+        .catch(function(err){
+            callback(0);
+        })
+    })
+    .catch(function(err){
+        callback(0);
+    });
 }
 
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
-module.exports.getDetails = getDetails;
-module.exports.saveSite = saveSite;
-module.exports.getSite = getSite;
-module.exports.downloadSite = downloadSite;
+module.exports.createGroup = createGroup;
