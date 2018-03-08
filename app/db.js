@@ -141,15 +141,43 @@ var getGroups = function(uemail, callback){
 
         r.db(dbname).table(tbgroups).getAll(r.args(g)).run()
         .then(function(resp){
-            callback(resp)
+            callback(resp);
         })
         .catch(function(err){
-            callback(null)
+            callback(null);
         })
     })
     .catch(function(err){
-        callback(null)
+        callback(null);
     });
+}
+
+var getGroupChat = function(data,callback){
+    console.log(data)
+    //get specific group data
+    r.db(dbname).table(tbgroups).get(data.groupid).run()
+    .then(function(response){
+
+        var members = response.groupmembers;
+        var found = false;
+
+        //makesure user enroled in the group
+        for(i = 0; i < members.length; i++){
+            //console.log(members[i]);
+            //compare email
+            if (members[i] == data.uemail)
+                found = true;
+        }
+
+        if(found){
+            callback(response);
+        }else{
+            callback(null);
+        }
+    })
+    .catch(function(err){
+        callback(null);
+    })
 }
 
 /**Export the modules */
@@ -157,3 +185,4 @@ module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
 module.exports.createGroup = createGroup;
 module.exports.getGroups = getGroups;
+module.exports.getGroupChat = getGroupChat;

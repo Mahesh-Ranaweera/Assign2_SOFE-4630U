@@ -158,8 +158,8 @@ router.get('/dashboard', function(req, res, next){
         //get users groups
         dbconn.getGroups(useremail, function(state){
             
-            console.log(state)
-            console.log(state[0])
+            //console.log(state)
+            //console.log(state[0])
 
             res.render('dashboard', {
                 title: 'Dashboard',
@@ -167,6 +167,51 @@ router.get('/dashboard', function(req, res, next){
                 groups: state
             });
         }); 
+    } else {
+        res.redirect('/');
+    }
+});
+
+router.get('/groupchat/:gid', function(req, res, next){
+    /**Makesure user session exists */
+    if (req.session.usersess) {
+        username = sess.name;
+        useremail = sess.email;
+
+        //send group data
+        data = {
+            groupid: req.params.gid,
+            uemail : useremail
+        }
+
+        dbconn.getGroupChat(data, function(state){
+
+            if (state != null){
+                res.render('groupchat', {
+                    title: 'Group Chat',
+                    name: username,
+                    group_data: state
+                });
+            }else{
+                //error page
+                res.redirect('/notfound');
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
+router.get('/notfound', function(req, res, next){
+    /**Makesure user session exists */
+    if (req.session.usersess) {
+        username = sess.name;
+        useremail = sess.email;
+
+        res.render('notfound', {
+            title: 'Group Not Found',
+            name: username
+        });
     } else {
         res.redirect('/');
     }

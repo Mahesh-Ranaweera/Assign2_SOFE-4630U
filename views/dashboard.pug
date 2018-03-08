@@ -28,16 +28,14 @@ block dashb
 
             if groups != null  
                 for item, i in groups
-                    //-define the var
-                    //- var gid = groups[i].groupid;
-                    //- var owner = group[i].owner;
-                    //- var gname = group[i].groupname;
 
                     .card-holder.three_w
                         .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
 
-                            .card-body.smooth()
-                                .uk-card-title | Name
+                            - var url = '/groupchat/'+item.groupid;
+                            a(href=url)
+                                .card-body.smooth
+                                    .uk-card-title #{item.groupname}
 
                             .card-footer
                                 button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
