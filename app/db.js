@@ -98,7 +98,7 @@ var getUSER = function(useremail, callback){
 
 /**Create Group */
 var createGroup = function(data, callback){
-    console.log(data)
+    //console.log(data)
 
     //insert the group data
     r.db(dbname).table(tbgroups).insert({
@@ -126,7 +126,34 @@ var createGroup = function(data, callback){
     });
 }
 
+var getGroups = function(uemail, callback){
+    //get groups for the user
+    var g = [];
+    r.db(dbname).table(tbusers).get(uemail).getField('groups').run()
+    .then(function(response){
+        //console.log(response);
+
+        //get group info for each group
+        for (i = 0; i  < response.length; i++){
+            //console.log(response[i].groupid)
+            g.push(response[i].groupid);
+        }
+
+        r.db(dbname).table(tbgroups).getAll(r.args(g)).run()
+        .then(function(resp){
+            callback(resp)
+        })
+        .catch(function(err){
+            callback(null)
+        })
+    })
+    .catch(function(err){
+        callback(null)
+    });
+}
+
 /**Export the modules */
 module.exports.addUSER = addUSER;
 module.exports.getUSER = getUSER;
 module.exports.createGroup = createGroup;
+module.exports.getGroups = getGroups;

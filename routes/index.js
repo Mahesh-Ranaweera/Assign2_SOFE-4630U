@@ -155,10 +155,18 @@ router.get('/dashboard', function(req, res, next){
         username = sess.name;
         useremail = sess.email;
 
-        res.render('dashboard', {
-            title: 'Dashboard',
-            name: username
-        });
+        //get users groups
+        dbconn.getGroups(useremail, function(state){
+            
+            console.log(state)
+            console.log(state[0])
+
+            res.render('dashboard', {
+                title: 'Dashboard',
+                name: username,
+                groups: state
+            });
+        }); 
     } else {
         res.redirect('/');
     }

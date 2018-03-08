@@ -26,50 +26,59 @@ block dashb
         //- User enrolled grouped
         .section
 
-            .card-holder.three_w
-                .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
+            if groups != null  
+                for item, i in groups
+                    //-define the var
+                    //- var gid = groups[i].groupid;
+                    //- var owner = group[i].owner;
+                    //- var gname = group[i].groupname;
 
-                    .card-body.smooth()
-                        .uk-card-title Group Name
+                    .card-holder.three_w
+                        .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
 
-                    .card-footer
-                        button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
-                            span(uk-icon='icon: trash')
+                            .card-body.smooth()
+                                .uk-card-title | Name
 
-                        //-date
-                        .date-info
+                            .card-footer
+                                button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
+                                    span(uk-icon='icon: trash')
 
-            div.uk-flex-top(id="createGroup", uk-modal)
-                .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
-                    button.uk-modal-close-default(type='button', uk-close)
-                    .uk-modal-header
-                        h2.uk-modal-title Create New Group
-                    
-                    .uk-modal-body
-                        form.uk-grid-small(method='POST', action='/create_group')
-                            .uk-width-1-1
-                                label(for='groupName') Enter Group Name:
-                                input.uk-input(name='groupName', type='text', required)
+                                //-date
+                                .date-info
 
-                            .uk-margin
-                                .uk-text-right
-                                    button.uk-button.uk-button-primary(name='btncreateGroup', type='submit') CREATE GROUP
-                    
 
-            div.uk-flex-top(id="joinGroup", uk-modal)
-                .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
-                    button.uk-modal-close-default(type='button', uk-close)
-                    .uk-modal-header
-                        h2.uk-modal-title Join Group
+    //-modal for creating and joining groups
+    div.uk-flex-top(id="createGroup", uk-modal)
+        .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
+            button.uk-modal-close-default(type='button', uk-close)
+            .uk-modal-header
+                h2.uk-modal-title Create New Group
+            
+            .uk-modal-body
+                form.uk-grid-small(method='POST', action='/create_group')
+                    .uk-width-1-1
+                        label(for='groupName') Enter Group Name:
+                        input.uk-input(name='groupName', type='text', required)
 
-                    .uk-modal-body
-                        form.uk-grid-small(method='POST', action='/join_group')
-                            .uk-width-1-1
-                                label(for='groupID') Enter Group ID:
-                                input.uk-input(name='groupID', type='password' required)
+                    .uk-margin
+                        .uk-text-right
+                            button.uk-button.uk-button-primary(name='btncreateGroup', type='submit') CREATE GROUP
+            
 
-                            .uk-margin
-                                .uk-text-right
-                                    button.uk-button.uk-button-primary(name='btnjoinGroup', type='submit') JOIN GROUP
+    div.uk-flex-top(id="joinGroup", uk-modal)
+        .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
+            button.uk-modal-close-default(type='button', uk-close)
+            .uk-modal-header
+                h2.uk-modal-title Join Group
 
-                        
+            .uk-modal-body
+                form.uk-grid-small(method='POST', action='/join_group')
+                    .uk-width-1-1
+                        label(for='groupID') Enter Group ID:
+                        input.uk-input(name='groupID', type='password' required)
+
+                    .uk-margin
+                        .uk-text-right
+                            button.uk-button.uk-button-primary(name='btnjoinGroup', type='submit') JOIN GROUP
+
+                
