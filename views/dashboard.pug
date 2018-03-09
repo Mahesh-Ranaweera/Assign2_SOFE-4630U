@@ -1,48 +1,46 @@
 extends dashb_layout
 
 block dashb
-    .content-header
+    //.content-card
+    .section
+        //-group create and join card
+        .card-holder.half_w
+            .uk-card.uk-card-primary.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #createGroup")
+                .card-icon-center
+                    span(uk-icon='icon: plus; ratio: 2')
+                .card-footer-center
+                    | Create Group
         
-        //.content-card
-        .section
-            //-group create and join card
-            .card-holder.half_w
-                .uk-card.uk-card-primary.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #createGroup")
-                    .card-icon-center
-                        span(uk-icon='icon: plus; ratio: 2')
-                    .card-footer-center
-                        | Create Group
-            
-            .card-holder.half_w
-                .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #joinGroup")
-                    .card-icon-center
-                        span(uk-icon='icon: users; ratio: 2')
-                    .card-footer-center
-                        | Join Group
-        
-        .section-header
-            | User Groups
-        
-        //- User enrolled grouped
-        .section
+        .card-holder.half_w
+            .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height(uk-toggle="target: #joinGroup")
+                .card-icon-center
+                    span(uk-icon='icon: users; ratio: 2')
+                .card-footer-center
+                    | Join Group
+    
+    .section-header
+        | User Groups
+    
+    //- User enrolled grouped
+    .section
 
-            if groups != null  
-                for item, i in groups
+        if groups != null  
+            for item, i in groups
 
-                    .card-holder.three_w
-                        .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
+                .card-holder.three_w
+                    .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
 
-                            - var url = '/groupchat/'+item.groupid;
-                            a(href=url)
-                                .card-body.smooth
-                                    .uk-card-title #{item.groupname}
+                        - var url = '/groupchat/'+item.groupid;
+                        a(href=url)
+                            .card-body.smooth
+                                .uk-card-title #{item.groupname}
 
-                            .card-footer
-                                button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
-                                    span(uk-icon='icon: trash')
+                        .card-footer
+                            button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
+                                span(uk-icon='icon: trash')
 
-                                //-date
-                                .date-info
+                            //-date
+                            .date-info
 
 
     //-modal for creating and joining groups
