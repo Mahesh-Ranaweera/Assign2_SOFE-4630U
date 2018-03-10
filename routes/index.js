@@ -191,7 +191,8 @@ router.get('/groupchat/:gid', function(req, res, next){
                 res.render('groupchat', {
                     title: 'Group Chat',
                     name: username,
-                    group_data: state
+                    msg_data: state,
+                    gdata: data
                 });
             }else{
                 //error page

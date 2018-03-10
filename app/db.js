@@ -225,8 +225,27 @@ var addGroup = function(data, callback){
     });
 }
 
-/**manage chat data */
+//insert chat data to db
+var insertChat = function(data, callback){
+    var storemsg = {
+        stamp: data.stamp,
+        from: data.meta.uemail,
+        msg: data.msg
+    }
 
+    r.db(dbname).table(tbgroups).get(data.meta.groupid)
+        .update({
+            'groupchat': r.row('groupchat').append(storemsg)
+        }).run()
+        .then(function(resp){
+            //console.log(resp)
+            callback(1);
+        })
+        .catch(function(err){
+            //console.log(err)
+            callback(0);
+        });
+}
 
 /**Export the modules */
 module.exports.addUSER = addUSER;
@@ -235,3 +254,4 @@ module.exports.createGroup = createGroup;
 module.exports.getGroups = getGroups;
 module.exports.getGroupChat = getGroupChat;
 module.exports.addGroup = addGroup;
+module.exports.insertChat = insertChat;

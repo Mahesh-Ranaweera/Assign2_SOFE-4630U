@@ -18,7 +18,7 @@ $(function (){
     $('#chatroom').submit(function(e){
         var url = '/sendmsg';
         var chatdata = {
-            meta: $('#chat_data').val(),
+            meta: JSON.parse($('#chat_data').val()),
             msg : $('#chat_msg').val(),
             stamp: Date.now()
         }
@@ -33,7 +33,7 @@ $(function (){
         e.preventDefault();
     })
 
-    socket.on('dbchats', function(data){
+    socket.on('recievedata', function(data){
         console.log(data);
 
         updateScroll();
