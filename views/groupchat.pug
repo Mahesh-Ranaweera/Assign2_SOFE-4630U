@@ -1,10 +1,13 @@
 extends dashb_layout
 
 block dashb
+    script(src='/js/socket.io.js')
+    script(src='/js/chat.js')
+
     //.content-card
     .content-card
         .chat-wrapper 
-            .chat-content
+            .chat-content#chatContainer
                 .chat-row
                     .chat-other(title='Other Person')
                         .chat-img
@@ -86,6 +89,13 @@ block dashb
                         .chat-msg
                             | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
                             | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
+                
+                .chat-row
+                    .chat-other(title='Other Person')
+                        .chat-img
+                        .chat-msg
+                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
+                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
                 .chat-row
                     .chat-me(title='Mahesh Ranaweera')
                         .chat-msg
@@ -111,26 +121,14 @@ block dashb
                         .chat-msg
                             | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
                             | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello
-                        .chat-img
-                
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello Mahesh
-                        .chat-img
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
+
             .chat-footer
                 .chat-footer-3w
-                    input.chat-input(type='text')
+                    form#chatroom()
+                        input#chat_data(type='hidden', name='chat_data', value='hello')
+                        input.chat-input#chat_msg(type='text' autofocus placeholder='>')
                 .chat-footer-w
-                    | Other
+                    .chat-btns
+                        span(uk-icon='icon: image' onclick='imageUploadForm();')
+                    .chat-btns
+                        span(uk-icon='icon: commenting' onclick='chatSubmitForm();')

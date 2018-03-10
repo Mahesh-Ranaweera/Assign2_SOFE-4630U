@@ -579,13 +579,14 @@ top-modal {
 
 .chat-footer-3w{
     flex: 1;
-    padding: 10px 0px;;
+    padding: 10px 0px;
     float: left;
     box-sizing: border-box;
 }
 
 .chat-footer-w{
-    width: 200px;
+    width: 90px;
+    padding: 10px 0px;
     box-sizing: border-box;
 }
 
@@ -655,4 +656,21 @@ top-modal {
 
 .chat-me .chat-img{
     float: right;
+}
+
+.chat-btns{
+    width: 40px;
+    height: 40px;
+    float: right;
+    padding: 0;
+    border-radius: 4px;
+    line-height: 40px;
+    text-align: center;
+    color: #2196f3;
+    cursor: pointer;
+}
+
+.chat-btns:hover{
+    color: #005792;
+    background-color: #eee;
 }

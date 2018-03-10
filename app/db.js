@@ -181,7 +181,6 @@ var getGroupChat = function(data,callback){
 }
 
 var addGroup = function(data, callback){
-    console.log(data)
     //add the given id to users group list
     r.db(dbname).table(tbusers).get(data.uemail).run()
     .then(function(response){
@@ -191,9 +190,8 @@ var addGroup = function(data, callback){
 
         //go through array an check user is already has the group
         for(i = 0; i < usergroups.length; i++){
-            //console.log(usergroups[i].groupid);
-            if(data.gid == usergroups[i].groupid)
-                found == true;
+            if(usergroups[i].groupid === data.gid)
+                found = true;
         }
 
         //if found send already registered
@@ -215,30 +213,20 @@ var addGroup = function(data, callback){
                 })]
             ).run()
             .then(function (resp){
-                console.log(resp)
                 callback(1);
             })
             .catch(function(err){
-                console.log(err)
                 callback(0);
             })
         }
     })
     .catch(function(err){
-        console.log(err);
         callback(0);
-    })
-    
-
-
-
-    // r.db(dbname).table(tbusers).get(data.uemail)
-    //     .update({
-    //         'groups': r.row('groups').append({
-    //             'groupid': response.generated_keys[0]
-    //         })
-    //     }).run()
+    });
 }
+
+/**manage chat data */
+
 
 /**Export the modules */
 module.exports.addUSER = addUSER;

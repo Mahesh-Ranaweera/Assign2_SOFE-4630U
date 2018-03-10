@@ -229,17 +229,22 @@ router.post('/join_group', function(req, res, next){
         uemail: sess.email
     }
 
-    dbconn.addGroup(data, function(state){
-        console.log(state)
-
-        if(state == 1){
-            res.redirect('/dashboard');
-        }else if(state == -1){
-            res.redirect('/dashboard?notify=registered')
-        } else{
-            res.redirect('/dashboard?notify=error')
-        }
-    });
+    //validate the joinid
+    if(data.gid.length == 36){
+        dbconn.addGroup(data, function(state){
+            console.log(state)
+    
+            if(state == 1){
+                res.redirect('/dashboard');
+            }else if(state == -1){
+                res.redirect('/dashboard?notify=registered');
+            } else{
+                res.redirect('/dashboard?notify=error');
+            }
+        });
+    }else{
+        res.redirect('/dashboard?notify=invalidid');
+    }
 });
 
 /**SIGNOUT */

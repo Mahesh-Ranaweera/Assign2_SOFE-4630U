@@ -9,6 +9,12 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket){
+    console.log('a user connected');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
