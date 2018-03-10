@@ -172,6 +172,7 @@ router.get('/dashboard', function(req, res, next){
     }
 });
 
+/**user group */
 router.get('/groupchat/:gid', function(req, res, next){
     /**Makesure user session exists */
     if (req.session.usersess) {
@@ -202,6 +203,7 @@ router.get('/groupchat/:gid', function(req, res, next){
     }
 });
 
+/**group not found */
 router.get('/notfound', function(req, res, next){
     /**Makesure user session exists */
     if (req.session.usersess) {
@@ -217,6 +219,26 @@ router.get('/notfound', function(req, res, next){
     }
 });
 
+
+/**join group */
+router.post('/join_group', function(req, res, next){
+    var group_name = req.body.groupID;
+
+    data = {
+        gname: group_name,
+        uemail: sess.email
+    }
+
+    dbconn.createGroup(data, function(state){
+        console.log(state)
+
+        if(state == 1){
+            res.redirect('/dashboard');
+        }else{
+            res.redirect('/dashboard?notify=error')
+        }
+    });
+})
 
 /**SIGNOUT */
 router.get('/signout', function(req, res, next) {
