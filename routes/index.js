@@ -222,23 +222,25 @@ router.get('/notfound', function(req, res, next){
 
 /**join group */
 router.post('/join_group', function(req, res, next){
-    var group_name = req.body.groupID;
+    var group_id = req.body.groupID;
 
     data = {
-        gname: group_name,
+        gid: group_id,
         uemail: sess.email
     }
 
-    dbconn.createGroup(data, function(state){
+    dbconn.addGroup(data, function(state){
         console.log(state)
 
         if(state == 1){
             res.redirect('/dashboard');
-        }else{
+        }else if(state == -1){
+            res.redirect('/dashboard?notify=registered')
+        } else{
             res.redirect('/dashboard?notify=error')
         }
     });
-})
+});
 
 /**SIGNOUT */
 router.get('/signout', function(req, res, next) {
