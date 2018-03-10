@@ -13,8 +13,8 @@ function updateScroll(){
 
 //chat submit::handle using sockets
 $(function (){
-    var socket = io({transports: ['websocket'], upgrade: false});
-    
+    var socket = io();
+
     $('#chatroom').submit(function(e){
         var url = '/sendmsg';
         var chatdata = {
@@ -26,15 +26,6 @@ $(function (){
 
         //maksure chat data is available to send and clear input
         if(chatdata.msg != ''){
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: '',
-                success: function(data){
-                    alert(data);
-                }
-            });
-
             socket.emit('chatdata', chatdata);
             $('#chat_msg').val('');
         }
