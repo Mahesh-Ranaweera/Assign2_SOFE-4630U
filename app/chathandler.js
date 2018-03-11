@@ -19,14 +19,9 @@ module.exports = function(server){
         socket.on('chatdata', function(chatdata){
             //console.log(chatdata);
 
-            //do regex test to see string contain any get requests
-            
-            var regex = /::get/;
-            if(regex.test(chatdata.msg)){
-                console.log(true);
-            }else{
-                console.log(false);
-            }
+            APIcalls.getInfo(chatdata.msg, function(data){
+                console.log(data);
+            })
 
             dbconn.insertChat(chatdata, function(state){
                 //console.log(state);
