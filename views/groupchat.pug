@@ -6,126 +6,34 @@ block dashb
     //.content-card
     .content-card
         .chat-wrapper 
+            .chat-header
+                | #{msg_data.groupname}
             .chat-content#chatContainer
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello
-                        .chat-img
+                for item, i in msg_data.groupchat
+                    
+                    if item.from ==  gdata.uemail
+                        .chat-row
+                            .chat-me(title=item.from)
+                                .chat-msg
+                                    | #{item.msg}
+                                .chat-img
+                    
+                    else
+                        .chat-row
+                            .chat-other(title=item.from)
+                                .chat-img
+                                .chat-msg
+                                    | #{item.msg}
                 
                 .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello Mahesh
-                        .chat-img
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello
-                        .chat-img
-                
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello Mahesh
-                        .chat-img
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello
-                        .chat-img
-                
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello Mahesh
-                        .chat-img
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello
-                        .chat-img
-                
-                .chat-row
-                    .chat-me(title='Mahesh Ranaweera')
-                        .chat-msg
-                            | Hello Mahesh
-                        .chat-img
-                
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
-
-                .chat-row
-                    .chat-other(title='Other Person')
-                        .chat-img
-                        .chat-msg
-                            | asdasd a adsdas  asd asd asd asdas as asdasd a asd asd asd asd as  asd asda s
-                            | asd aasd asd adsa das as da asd asd asd as asdas as das d asdas das dsa sa
+                    .chat-api-info
+                        | Test
 
             .chat-footer
                 .chat-footer-3w
                     form#chatroom()
                         input#chat_data(type='hidden', name='chat_data', value=gdata)
-                        input.chat-input#chat_msg(type='text' autofocus placeholder='>')
+                        input.chat-input#chat_msg(type='text' autofocus placeholder='>' autocomplete='off')
                 .chat-footer-w
                     .chat-btns
                         span(uk-icon='icon: image' onclick='imageUploadForm();')

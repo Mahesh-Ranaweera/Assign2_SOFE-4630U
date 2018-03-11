@@ -233,7 +233,7 @@ router.post('/join_group', function(req, res, next){
     //validate the joinid
     if(data.gid.length == 36){
         dbconn.addGroup(data, function(state){
-            console.log(state)
+            //console.log(state)
     
             if(state == 1){
                 res.redirect('/dashboard');

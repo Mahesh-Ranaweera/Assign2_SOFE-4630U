@@ -1,5 +1,6 @@
 /**Socket handler */
 var dbconn = require('../app/db');
+var APIcalls = require('../app/regex');
 
 /**Sockets */
 module.exports = function(server){
@@ -9,11 +10,23 @@ module.exports = function(server){
     io.on('connection', function(socket){
         console.log(' %s sockets connected : %s conn id', io.engine.clientsCount, socket.conn.id);
 
+        //join the room
+        socket.on('joinroom', function(room){
+            socket.join(room);
+        });
+
         //add chat to db
         socket.on('chatdata', function(chatdata){
-            console.log(chatdata);
+            //console.log(chatdata);
 
-            socket.join(chatdata.meta.groupid);
+            //do regex test to see string contain any get requests
+            
+            var regex = /::get/;
+            if(regex.test(chatdata.msg)){
+                console.log(true);
+            }else{
+                console.log(false);
+            }
 
             dbconn.insertChat(chatdata, function(state){
                 //console.log(state);
