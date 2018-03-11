@@ -19,24 +19,45 @@ module.exports = function(server){
         socket.on('chatdata', function(chatdata){
             //console.log(chatdata);
 
+            //check the text for any commands
             APIcalls.getInfo(chatdata.msg, function(data){
                 console.log(data);
-            })
+                /**Handling messages based on tags
+                 * text: normal text message
+                 * note: notes
+                 * wheather: get wheather info
+                 */
+                var chat = {stamp: null, from: null, msg: null, tag: null}
 
-            dbconn.insertChat(chatdata, function(state){
-                //console.log(state);
-                if(state == 1){
-
-                    var msg = {
+                if(data != null){
+                    //organize the sending data
+                    chat = {
                         stamp: chatdata.stamp,
                         from: chatdata.meta.uemail,
-                        msg: chatdata.msg
+                        msg: data.content,
+                        tag: data.tag
                     }
-                    //broadcast to everyone
-                    io.sockets.in(chatdata.meta.groupid).emit('recievedata', msg);
+
+                    console.log(chat);
+                }else{
+                    chat = {
+                        stamp: chatdata.stamp,
+                        from: chatdata.meta.uemail,
+                        msg: chatdata.msg,
+                        tag: 'text'
+                    }
                 }
-            })
-            
+
+                //send the message to frontend
+                dbconn.insertChat(chatdata, function(state){
+                    //console.log(state);
+                    if(state == 1){
+                        //broadcast to everyone
+                        io.sockets.in(chatdata.meta.groupid).emit('recievedata', chat);
+                    }
+                });
+
+            });    
         });
 
         //disconnect user
