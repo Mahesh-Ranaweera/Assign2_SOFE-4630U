@@ -1,0 +1,4 @@
+* Handle 400 error from the API
+* Add api info in the chat window
+* New chat card for notes
+* Store api data on db
