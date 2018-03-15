@@ -29,27 +29,30 @@ module.exports = function(server){
                  */
                 var chat = {stamp: null, from: null, msg: null, tag: null}
 
+                console.log(chatdata);
+
                 if(data != null){
                     //organize the sending data
                     chat = {
                         stamp: chatdata.stamp,
                         from: chatdata.meta.uemail,
                         msg: data.content,
-                        tag: data.tag
+                        tag: data.tag,
+                        groupid: chatdata.meta.groupid
                     }
-
-                    console.log(chat);
                 }else{
                     chat = {
                         stamp: chatdata.stamp,
                         from: chatdata.meta.uemail,
                         msg: chatdata.msg,
-                        tag: 'text'
+                        tag: 'text',
+                        groupid: chatdata.meta.groupid
                     }
                 }
 
+                console.log(chat);
                 //send the message to frontend
-                dbconn.insertChat(chatdata, function(state){
+                dbconn.insertChat(chat, function(state){
                     //console.log(state);
                     if(state == 1){
                         //broadcast to everyone

@@ -229,11 +229,12 @@ var addGroup = function(data, callback){
 var insertChat = function(data, callback){
     var storemsg = {
         stamp: data.stamp,
-        from: data.meta.uemail,
-        msg: data.msg
+        from: data.from,
+        msg: data.msg,
+        tag: data.tag
     }
 
-    r.db(dbname).table(tbgroups).get(data.meta.groupid)
+    r.db(dbname).table(tbgroups).get(data.groupid)
         .update({
             'groupchat': r.row('groupchat').append(storemsg)
         }).run()
