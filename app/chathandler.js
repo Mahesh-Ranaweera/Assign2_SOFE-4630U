@@ -29,8 +29,6 @@ module.exports = function(server){
                  */
                 var chat = {stamp: null, from: null, msg: null, tag: null}
 
-                console.log(chatdata);
-
                 if(data != null){
                     //organize the sending data
                     chat = {
@@ -50,7 +48,7 @@ module.exports = function(server){
                     }
                 }
 
-                console.log(chat);
+                //console.log(chat);
                 //send the message to frontend
                 dbconn.insertChat(chat, function(state){
                     //console.log(state);

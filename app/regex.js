@@ -4,7 +4,7 @@ var wKEY = require('./config');
 /**API calls from the plain text */
 var getInfo = function(string, callback){
     //define regex for commands to use
-    var regex = [/::get:weather/, /::note/];
+    var regex = [/::get:weather/, /::note:create/];
 
     command = {
         reg: null,
@@ -20,7 +20,16 @@ var getInfo = function(string, callback){
             callback(data);
         })
     }else if(regex[1].test(wordarr[0])){
-        callback(null);
+        //remove the cmd from the arr
+        wordarr.shift();
+        //append rest of the string with space and send the payload
+        var payload = {
+            tag: 'note',
+            content: {
+                note: wordarr.join(" ")
+            }
+        }
+        callback(payload);
     }else{
         callback(null);
     }
@@ -59,11 +68,6 @@ function getWeather(location, callback){
             }
         }
     });
-}
-
-//extract note info
-function getNote(arr, callback){
-    
 }
 
 module.exports.getInfo = getInfo;
