@@ -21,7 +21,7 @@ module.exports = function(server){
 
             //check the text for any commands
             APIcalls.getInfo(chatdata.msg, function(data){
-                console.log(data);
+                //console.log(data);
                 /**Handling messages based on tags
                  * text: normal text message
                  * note: notes

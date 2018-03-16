@@ -626,10 +626,32 @@ top-modal {
     width: 100%;
     height: auto;
     float: left;
-    background-color: rgba(33, 150, 243, 0.1);
     padding: 15px 20px 15px 20px;
     box-sizing: border-box;
     border-radius: 4px;
+    margin: 10px 0 10px 0;
+}
+
+.chat-api-header{
+    font-size: 24px;
+}
+
+.chat-api-content{
+    width: 100%;
+    float: left;
+}
+
+.chat-api-w2{
+    width: 50%;
+    float: left;
+}
+
+.notes-color{
+    background-color: var(--darkgrey-prim);
+}
+
+.weather-color{
+    background-color: var(--green-prim);
 }
 
 .chat-me, .chat-other{

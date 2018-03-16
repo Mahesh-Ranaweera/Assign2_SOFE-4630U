@@ -20,16 +20,22 @@ var getInfo = function(string, callback){
             callback(data);
         })
     }else if(regex[1].test(wordarr[0])){
-        //remove the cmd from the arr
-        wordarr.shift();
-        //append rest of the string with space and send the payload
-        var payload = {
-            tag: 'note',
-            content: {
-                note: wordarr.join(" ")
+
+        //make sure user enters text
+        if(wordarr.length > 1){
+            //remove the cmd from the arr
+            wordarr.shift();
+            //append rest of the string with space and send the payload
+            var payload = {
+                tag: 'note',
+                content: {
+                    note: wordarr.join(" ")
+                }
             }
+            callback(payload);
+        }else{
+            callback(null)
         }
-        callback(payload);
     }else{
         callback(null);
     }
@@ -44,30 +50,27 @@ function getWeather(location, callback){
         uri: "http://api.openweathermap.org/data/2.5/weather?q="+location+"&APPID="+wKEY.keys.weatherkey
     }
     
-    request(option, function (err, resp, body) {
-        //console.log(err, resp, body);
-        if(err){
-            callback(null);
-        }else{
-            var jsondata = JSON.parse(body);
-            console.log(body, resp, err);
-            
-            if(jsondata.cod != "404" || resp.statusCode != 404){
-                var payload = {
-                    tag: 'weather',
-                    content: {
-                        city: jsondata.name,
-                        temp: jsondata.main.temp,
-                        w: jsondata.weather[0].main,
-                        wdesc: jsondata.weather[0].description
-                    }
-                }
-                callback(payload);
-            }else{
-                callback(null);
+    request(option)
+    .then(function(data){
+        var jsondata = JSON.parse(data);
+        //console.log(jsondata)
+
+        var payload = {
+            tag: 'weather',
+            content: {
+                city: jsondata.name,
+                temp: jsondata.main.temp,
+                w: jsondata.weather[0].main,
+                wdesc: jsondata.weather[0].description
             }
         }
-    });
+
+        callback(payload);
+    })
+    .catch(function(err){
+        //console.log(err);
+        callback(null);
+    })
 }
 
 module.exports.getInfo = getInfo;

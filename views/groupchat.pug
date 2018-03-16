@@ -11,23 +11,41 @@ block dashb
             .chat-content#chatContainer
                 for item, i in msg_data.groupchat
                     
-                    if item.from ==  gdata.uemail
+                    //-group based on tags
+                    //-tag=text
+                    if item.tag == "text"
+                        //-organized based on owner and other email
+                        if item.from ==  gdata.uemail
+                            .chat-row
+                                .chat-me(title=item.from)
+                                    .chat-msg
+                                        | #{item.msg}
+                                    .chat-img
+                        
+                        else
+                            .chat-row
+                                .chat-other(title=item.from)
+                                    .chat-img
+                                    .chat-msg
+                                        | #{item.msg}
+
+                    //-tag=weather
+                    if item.tag == "weather"
+                        //-get weather data
                         .chat-row
-                            .chat-me(title=item.from)
-                                .chat-msg
-                                    | #{item.msg}
-                                .chat-img
-                    
-                    else
+                            .chat-api-info.weather-color
+                                .chat-api-header
+                                    | #{item.msg.city}
+                                .chat-api-content
+                                    | Temperature #{item.msg.temp} &#8457;
+                                .chat-api-content
+                                    b #{item.msg.w} | #{item.msg.wdesc}
+
+                    //-tag=note
+                    if item.tag == "note"
                         .chat-row
-                            .chat-other(title=item.from)
-                                .chat-img
-                                .chat-msg
-                                    | #{item.msg}
-                
-                .chat-row
-                    .chat-api-info
-                        | Test
+                            .chat-api-info.notes-color
+                                | #{item.msg.note}
 
             .chat-footer
                 .chat-footer-3w
