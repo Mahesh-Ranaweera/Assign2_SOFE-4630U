@@ -6,9 +6,11 @@ var APIcalls = require('../app/regex');
 module.exports = function(server){
     var io = require('socket.io')(server);
     var joingroup = null;
+    var num_members = 0;
 
     io.on('connection', function(socket){
         console.log(' %s sockets connected : %s conn id', io.engine.clientsCount, socket.conn.id);
+        
 
         //join the room
         socket.on('joinroom', function(room){
