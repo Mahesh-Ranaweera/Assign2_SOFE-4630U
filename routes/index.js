@@ -15,14 +15,18 @@ var session = require('express-session');
 
 //set the session
 router.use(session({
+    key: 'user_id',
     secret: 'HV3U00lcMahc84050VxX62xoMS67NhS4',
     resave: false,
-    saveUninitialized: true,
-    path: '/'
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    },
+    cookie: { secure: false }
 }));
 
 //start a session 
-var sess;
+var sess = null;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -107,7 +111,8 @@ router.post('/user_signin', function(req, res, next){
     var passw = req.body.strPassw;
 
     dbconn.getUSER(email, function(state){
-        //console.log(state.email);
+        console.log(state);
+        console.log(sess);
 
         /**check if user exists */
         if(state != null){
@@ -118,6 +123,8 @@ router.post('/user_signin', function(req, res, next){
                 sess.email = state.email;
                 sess.name  = state.fname + ' ' + state.lname;
 
+
+                console.log(sess);
                 res.redirect('/dashboard');
             }else{
                 res.redirect('/signin?notify=passw');

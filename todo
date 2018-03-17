@@ -1,5 +1,1 @@
-* Handle 400 error from the API
-* Add api info in the chat window
-* New chat card for notes
-* Store api data on db
-* handle the tags on the front end from db and from sockets
+* Session issue found
