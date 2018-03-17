@@ -7,7 +7,11 @@ block dashb
     .content-card
         .chat-wrapper 
             .chat-header
-                | #{msg_data.groupname}
+                .chat-header-btn
+                    a(href='/dashboard')
+                        span(uk-icon='icon: home; ratio: 0.8' title='Dashboard')
+                .chat-header-content
+                    | #{msg_data.groupname}
             .chat-content#chatContainer
                 for item, i in msg_data.groupchat
                     
@@ -47,13 +51,17 @@ block dashb
                             .chat-api-info.notes-color
                                 | #{item.msg.note}
 
-            .chat-footer
-                .chat-footer-3w
-                    form#chatroom()
-                        input#chat_data(type='hidden', name='chat_data', value=gdata)
+            form#chatroom()
+                .chat-footer
+                    .chat-footer-3w
+                        input#chat_data.chat-input(type='hidden', name='chat_data', value=gdata)
                         input.chat-input#chat_msg(type='text' autofocus placeholder='>' autocomplete='off')
-                .chat-footer-w
-                    .chat-btns
-                        span(uk-icon='icon: image' onclick='imageUploadForm();')
-                    .chat-btns
-                        span(uk-icon='icon: commenting' onclick='chatSubmitForm();')
+                    .chat-footer-w
+                        button.chat-btns(type='submit') 
+                            span(uk-icon='icon: commenting')
+                            
+                //.chat-footer-w
+                    //- .chat-btns
+                    //-     span(uk-icon='icon: image' onclick='imageUploadForm();')
+                    //-.chat-btns
+                       //- span(uk-icon='icon: commenting' onclick='chatSubmitForm();')
