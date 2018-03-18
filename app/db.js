@@ -153,7 +153,7 @@ var getGroups = function(uemail, callback){
 }
 
 var getGroupChat = function(data,callback){
-    console.log(data)
+    //console.log(data)
     //get specific group data
     r.db(dbname).table(tbgroups).get(data.groupid).run()
     .then(function(response){

@@ -15,18 +15,11 @@ var session = require('express-session');
 
 //set the session
 router.use(session({
-    key: 'user_id',
     secret: 'HV3U00lcMahc84050VxX62xoMS67NhS4',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 600000
-    },
-    cookie: { secure: false }
+    resave: true,
+    saveUninitialized: true,
+    path: '/'
 }));
-
-//start a session 
-var sess = null;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -64,7 +57,7 @@ router.post('/user_signup', function(req, res, next){
     var passw2 = req.body.strPassw2;
 
     if(passw1 == passw2){
-        console.log('login');
+        //console.log('login');
 
         data = {
             email: email,
@@ -111,8 +104,7 @@ router.post('/user_signin', function(req, res, next){
     var passw = req.body.strPassw;
 
     dbconn.getUSER(email, function(state){
-        console.log(state);
-        console.log(sess);
+        //console.log(state);
 
         /**check if user exists */
         if(state != null){
@@ -120,11 +112,11 @@ router.post('/user_signin', function(req, res, next){
                 /**Create a user session */
                 sess = req.session;
                 sess.usersess = true;
-                sess.email = state.email;
-                sess.name  = state.fname + ' ' + state.lname;
+                req.session.usersess = true;
+                req.session.email = state.email;
+                req.session.name = state.fname + ' ' + state.lname;
 
-
-                console.log(sess);
+                //console.log(req.session);
                 res.redirect('/dashboard');
             }else{
                 res.redirect('/signin?notify=passw');
@@ -141,7 +133,7 @@ router.post('/create_group', function(req, res, next){
 
     data = {
         gname: group_name,
-        uemail: sess.email
+        uemail: req.session.email
     }
 
     dbconn.createGroup(data, function(state){
@@ -159,8 +151,8 @@ router.post('/create_group', function(req, res, next){
 router.get('/dashboard', function(req, res, next){
     /**Makesure user session exists */
     if (req.session.usersess) {
-        username = sess.name;
-        useremail = sess.email;
+        username = req.session.name;
+        useremail = req.session.email;
 
         //get users groups
         dbconn.getGroups(useremail, function(state){
@@ -183,8 +175,8 @@ router.get('/dashboard', function(req, res, next){
 router.get('/groupchat/:gid', function(req, res, next){
     /**Makesure user session exists */
     if (req.session.usersess) {
-        username = sess.name;
-        useremail = sess.email;
+        username = req.session.name;
+        useremail = req.session.email;
 
         //send group data
         data = {
@@ -215,8 +207,8 @@ router.get('/groupchat/:gid', function(req, res, next){
 router.get('/notfound', function(req, res, next){
     /**Makesure user session exists */
     if (req.session.usersess) {
-        username = sess.name;
-        useremail = sess.email;
+        username = req.session.name;
+        useremail = req.session.email;
 
         res.render('notfound', {
             title: 'Group Not Found',
@@ -234,7 +226,7 @@ router.post('/join_group', function(req, res, next){
 
     data = {
         gid: group_id,
-        uemail: sess.email
+        uemail: req.session.email
     }
 
     //validate the joinid
