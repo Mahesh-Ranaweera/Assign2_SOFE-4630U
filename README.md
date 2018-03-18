@@ -16,10 +16,11 @@ Assignment 2: Cloud Computing
         ::get:weather <location>
         ::get:weather Toronto,ca
     ```
+    * https://openweathermap.org api was used to get the weather information
 * Create and share notes with team members
     ```js
         >type in the messaging input
-        
+
         ::note:create <description of the note goes here>
         ::note:create This is the content of the note that is shared with the team
     ```
