@@ -10,8 +10,9 @@ block dashb
                 .chat-header-btn
                     a(href='/dashboard')
                         span(uk-icon='icon: home; ratio: 0.8' title='Dashboard')
-                .chat-header-content
-                    | #{msg_data.groupname}
+                .chat-header-content(title='Get Group Info' uk-toggle="target: #groupinfo")
+                    | #{msg_data.groupname} 
+                    span(uk-icon='icon: info;')
             .chat-content#chatContainer
                 for item, i in msg_data.groupchat
                     
@@ -59,3 +60,34 @@ block dashb
                     .chat-footer-w
                         button.chat-btns(type='submit') 
                             span(uk-icon='icon: commenting')
+
+    div.uk-flex-top(id="groupinfo", uk-modal)
+        .uk-modal-dialog.uk-modal-body.uk-margin-auto-vertical
+            button.uk-modal-close-default(type='button', uk-close)
+            .uk-modal-header
+                h2.uk-modal-title #{msg_data.groupname}
+
+            .uk-modal-body
+                form.uk-grid-small(method='POST', action='/join_group')
+                    .uk-width-1-1
+                        p Members:
+                        p 
+                            for item, i in msg_data.groupmembers
+                                li #{item}
+
+                        hr
+                        p 
+                            b Using the API requests
+                        p Request weather reports
+                        p
+                            code ::get:weather location
+                        P   Example
+                            code ::get:weather Toronto,ca
+
+                        P   
+                            b Create notes and reminders
+                        p 
+                            code ::note:create description of the note 
+                        p   Example
+                            code ::note:create Let's meet tomorrow at 3.00pm
+                        

@@ -753,6 +753,7 @@ top-modal {
 .chat-header-content{
     flex: 1;
     float: left;
+    cursor: pointer;
 }
 
 .center-div{

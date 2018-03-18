@@ -193,6 +193,7 @@ router.get('/groupchat/:gid', function(req, res, next){
         }
 
         dbconn.getGroupChat(data, function(state){
+            //console.log(state)
 
             if (state != null){
                 res.render('groupchat', {
