@@ -222,7 +222,7 @@ a {
     width: 100%;
     height: 54px;
     position: fixed;
-    z-index: 10000;
+    z-index: 1035;
 }
 
 .app-menu {
@@ -753,4 +753,17 @@ top-modal {
 .chat-header-content{
     flex: 1;
     float: left;
+}
+
+.center-div{
+    width: 300px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 100px;
+    font-size: 24px;
+    text-align: center;
 }

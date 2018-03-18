@@ -28,19 +28,20 @@ block dashb
             for item, i in groups
 
                 .card-holder.three_w
-                    .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
-
-                        - var url = '/groupchat/'+item.groupid;
-                        a(href=url)
+                    - var url = '/groupchat/'+item.groupid;
+                    a(href=url)
+                        .uk-card.uk-card-default.uk-card-hover.uk-card-body.card-height.uk-padding-small
                             .card-body.smooth
                                 .uk-card-title #{item.groupname}
 
-                        .card-footer
-                            button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
-                                span(uk-icon='icon: trash')
-
-                            //-date
-                            .date-info
+                            .card-footer
+                                //- if (item.owner == uemail)
+                                //-     button.f-icon.delete(title='Delete Note', uk-toggle="target: #targetDEL")
+                                //-         span(uk-icon='icon: trash')
+                        
+                                //-date
+                                .date-info
+                                    | Group Members: #{item.groupmembers.length}
 
 
     //-modal for creating and joining groups
@@ -76,5 +77,19 @@ block dashb
                     .uk-margin
                         .uk-text-right
                             button.uk-button.uk-button-primary(name='btnjoinGroup', type='submit') JOIN GROUP
+
+    if (alert == 'registered')
+        script.
+            UIkit.notification({message: 'Already Registered', status: 'primary', pos: 'top-center'})
+
+    if (alert == 'error')
+        script.
+            UIkit.notification({message: 'Something went wrong, try again', status: 'warning', pos: 'top-center'})
+
+    if (alert == 'invalidid')
+        script.
+            UIkit.notification({message: 'Invalid groupID, makesure you enter the correct groupID', status: 'danger', pos: 'top-center'})
+
+        
 
                 

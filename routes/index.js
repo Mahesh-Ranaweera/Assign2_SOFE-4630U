@@ -154,6 +154,12 @@ router.get('/dashboard', function(req, res, next){
         username = req.session.name;
         useremail = req.session.email;
 
+        var alert = null;
+
+        if(req.query.notify != null){
+            alert = req.query.notify;
+        }
+
         //get users groups
         dbconn.getGroups(useremail, function(state){
             
@@ -163,7 +169,9 @@ router.get('/dashboard', function(req, res, next){
             res.render('dashboard', {
                 title: 'Dashboard',
                 name: username,
-                groups: state
+                groups: state,
+                uemail: useremail,
+                alert: alert
             });
         }); 
     } else {
