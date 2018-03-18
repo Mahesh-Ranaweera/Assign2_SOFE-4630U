@@ -10,7 +10,19 @@ Assignment 2: Cloud Computing
 * Create teams
 * Join teams
 * Get current weather report
+    ```js
+        >type in the messaging input
+
+        ::get:weather <location>
+        ::get:weather Toronto,ca
+    ```
 * Create and share notes with team members
+    ```js
+        >type in the messaging input
+        
+        ::note:create <description of the note goes here>
+        ::note:create This is the content of the note that is shared with the team
+    ```
 
 ![Notebook Description](https://github.com/Mahesh-Ranaweera/Assign2_SOFE-4630U/blob/master/public/assets/hive_description.svg?sanitize=true)
 
