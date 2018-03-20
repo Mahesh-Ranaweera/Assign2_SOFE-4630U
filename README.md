@@ -70,3 +70,23 @@ Assignment 2: Cloud Computing
     >> Navigate to localhost:3000 : for the webapp
     >> Navigate to localhost:8080 : for the rethinkdb admin site
 ```
+
+## Setting up AWS EC2 and adding Auto Scaling Group 
+URL to dashboard: https://console.aws.amazon.com/ec2/ 
+1. Choosing an Amazon Machine Image:
+    - For this assignment I chose Ubuntu Server 16.04 LTS
+
+2. Choose an Instance Type:
+    - I chosed General Purpose, t2.micro instance
+
+3. Configure Instance Details:
+    - I launched a Auto Scaling Group from the number of instance section
+
+4. Under Create Launch Configuration:
+    - Named the launch configuration
+    - Added a 8GB of storage to the instance
+
+5. Create Auto Scaling Group:
+    - Give a name to auto scaling group
+    - Set the group size to 1
+    - Under subnet I added availability zones
