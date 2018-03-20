@@ -4,7 +4,7 @@ Assignment 2: Cloud Computing
 ![Notebook Description](https://github.com/Mahesh-Ranaweera/Assign2_SOFE-4630U/blob/master/public/assets/hive_description.svg?sanitize=true)
 
 ## Web App Link
-> http://ec2-35-182-243-223.ca-central-1.compute.amazonaws.com:3000
+> <>
 
 ## Web-APP Features
 * User Authentication
